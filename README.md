@@ -4,7 +4,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.5-brightgreen.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-API REST desenvolvida com **Spring Boot** para realizar consultas de endereço a partir de um **CEP**, utilizando o serviço gratuito [ViaCEP](https://viacep.com.br/).
+API REST desenvolvida com **Spring Boot** para realizar consultas de endereço a partir de um **CEP**, utilizando o serviço gratuito [ViaCEP](https://viacep.com.br/). Inclui também uma página HTML simples para o usuário consultar o CEP pelo navegador.
 
 ---
 
@@ -13,6 +13,7 @@ API REST desenvolvida com **Spring Boot** para realizar consultas de endereço a
 - 🔍 Consulta de endereço via CEP (Integração com ViaCEP)
 - ⚡ API REST rápida e simples
 - 🛠️ Exemplo de consumo de API externa com **RestTemplate**
+- 🌐 Interface Web para consulta de CEP
 
 ---
 
@@ -35,8 +36,10 @@ consulta-cep/
 │   │   │   ├── controller/
 │   │   │   ├── model/
 │   │   │   └── service/
-│   │   └── resources/
-│   │       └── application.properties
+│   │   ├── resources/
+│   │   │   ├── static/
+│   │   │   │   └── index.html
+│   │   │   └── application.properties
 │   └── test/
 ├── pom.xml
 └── README.md
@@ -102,6 +105,19 @@ GET http://localhost:8080/api/cep/01001000
 ```
 
 ---
+## 🌐 Interface Web
+
+A aplicação possui uma página simples para consultar o CEP diretamente pelo navegador.
+
+## Acesse
+```bash
+http://localhost:8080/index.html
+```
+
+## Como usar
+1️⃣ Informe o CEP no campo
+2️⃣ Clique em Consultar
+3️⃣ O endereço será exibido abaixo
 
 ## ✍️ Autor
 

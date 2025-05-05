@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta de CEP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        #resultado {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Consulta de CEP</h1>
+    <input type="text" id="cep" placeholder="Digite o CEP (ex: 01001000)">
+    <button onclick="consultarCep()">Buscar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function consultarCep() {
+            const cep = document.getElementById('cep').value;
+            const resultadoDiv = document.getElementById('resultado');
+
+            if (!cep.match(/^\d{8}$/)) {
+                resultadoDiv.innerHTML = '<p style="color:red;">Digite um CEP válido (8 dígitos)</p>';
+                return;
+            }
+
+            fetch(`/cep/${cep}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('CEP não encontrado');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    resultadoDiv.innerHTML = `
+                        <p><strong>CEP:</strong> ${data.cep}</p>
+                        <p><strong>Logradouro:</strong> ${data.logradouro}</p>
+                        <p><strong>Bairro:</strong> ${data.bairro}</p>
+                        <p><strong>Cidade:</strong> ${data.localidade}</p>
+                        <p><strong>Estado:</strong> ${data.uf}</p>
+                    `;
+                })
+                .catch(error => {
+                    resultadoDiv.innerHTML = `<p style="color:red;">Erro: ${error.message}</p>`;
+                });
+        }
+    </script>
+</body>
+</html>
